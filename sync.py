@@ -20,7 +20,8 @@ class Chip(object):
         flag1 = self.path / 'RTAComplete.txt'
         flag2 = self.path / 'RunCompletionStatus.xml'
         runinfo = self.path / 'RunInfo.xml'
-        return flag1.exists() or flag2.exists() or time.time() - runinfo.stat().st_mtime > 24 * 3600 * 7
+
+        return flag1.exists() or flag2.exists() or (runinfo.exists() and time.time() - runinfo.stat().st_mtime > 24 * 3600 * 7)
 
     def is_chip_dir(self):
         """determine whether dir is a valid sequence run dir"""
