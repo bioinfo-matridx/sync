@@ -102,6 +102,8 @@ def sync_all(base_dir, remote, **kwargs):
         chip = Chip(chip_dir)
         if not chip.is_chip_dir():
             continue
+        if chip.sync_done_flag.exists():
+            continue
         try:
             chip.sync(remote, **kwargs)
         except Exception as e:
